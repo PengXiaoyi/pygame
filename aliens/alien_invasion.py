@@ -2,6 +2,7 @@ import sys
 import pygame
 from aliens.settings import Settings
 from aliens.ship import Ship
+import aliens.game_functions as gf
 
 
 def run_game():
@@ -13,17 +14,11 @@ def run_game():
     ship = Ship(screen)
     # 开始游戏的主循环
     while True:
-        # 设置背景颜色
-        screen.fill(ai_settings.bg_color)
-        ship.blitme()
-
         # 监视键盘和鼠标事件
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-
-        # 让最近绘制的屏幕可见
-        pygame.display.flip()
+        gf.check_events(ship)
+        ship.update()
+        # 绘制画布
+        gf.update_screen(ai_settings, screen, ship)
 
 
 run_game()
