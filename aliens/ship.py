@@ -7,7 +7,7 @@ class Ship():
         self.screen = screen
         # 加载飞船图像并获取其外接矩形
         self.image = pygame.image.load(r'images\ship.bmp')
-        self.image = pygame.transform.scale(self.image, (80, 60))
+        self.image = pygame.transform.scale(self.image, (50, 70))
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         # 将每艘新飞船放在屏幕底部中央
@@ -24,9 +24,9 @@ class Ship():
         self.screen.blit(self.image, self.rect)
 
     def update(self):
-        if self.moving_right:
+        if self.moving_right and self.rect.right < self.screen_rect.right:
             self.rect.centerx += 1
-        elif self.moving_left:
+        elif self.moving_left and self.rect.left > 0:
             self.rect.centerx -= 1
         elif self.moving_up:
             self.rect.bottom -= 1
